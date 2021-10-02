@@ -1,35 +1,64 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
-import { AssetTable } from './components/asset-table';
-import { Overview } from './components/overview';
+import React, { useMemo } from 'react'
+import { Card, Container, Spinner } from 'react-bootstrap'
 
-function App() {
+import { AssetTable } from './components/asset-table'
+import { Overview } from './components/overview'
+import { useGetAccountByAddressQuery, useGetPricesQuery } from './services/kava'
+import { getAssets } from './utils/calculator'
+
+const App: React.FC = () => {
+  const prices = useGetPricesQuery(null, {
+    pollingInterval: 5000,
+  })
+  const account = useGetAccountByAddressQuery(
+    'kava1vlpsrmdyuywvaqrv7rx6xga224sqfwz3fyfhwq',
+    {
+      pollingInterval: 5000,
+    },
+  )
+
+  const loading = useMemo(
+    () => account.isLoading && prices.isLoading,
+    [account, prices],
+  )
+
+  const assets = useMemo(
+    () =>
+      account.data && prices.data
+        ? getAssets(account.data.result, prices.data.result)
+        : [],
+    [account, prices],
+  )
+
+  const error = useMemo(() => account.error || prices.error, [account, prices])
+
   return (
     <Container>
       <h3 className="m-3">Balances</h3>
-      <div className="mt-3 mb-5">
-        <Overview balance={536.62} available={378.31} locked={158.31} />
-      </div>
-      <AssetTable
-        assets={[
-          {
-            name: 'KAVA',
-            price: 6.95,
-            total: 31.18571385,
-            available: 147.68,
-            locked: 68.8,
-          },
-          {
-            name: 'HARD',
-            price: 2.23,
-            total: 40.3107,
-            available: 0.36,
-            locked: 89.51,
-          },
-        ]}
-      />
+      {loading || error ? (
+        <Card>
+          <Card.Body>
+            <div className="d-flex align-items-center justify-content-center">
+              {loading ? (
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                <p className="text-error">{error}</p>
+              )}
+            </div>
+          </Card.Body>
+        </Card>
+      ) : (
+        <>
+          <div className="mt-3 mb-5">
+            <Overview assets={assets} />
+          </div>
+          <AssetTable assets={assets} />
+        </>
+      )}
     </Container>
-  );
+  )
 }
 
-export default App;
+export default App

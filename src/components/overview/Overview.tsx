@@ -1,17 +1,20 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React from 'react'
+import { Card } from 'react-bootstrap'
 
-import { toMoneyFormat } from '../../utils/formatter';
-import { VSplitter } from './styles';
+import {
+  getAvailableBalance,
+  getLockedBalance,
+  getTotalBalance,
+} from '../../utils/calculator'
+import { toMoneyFormat } from '../../utils/formatter'
+import { VSplitter } from './styles'
 
 export interface OverviewProps {
-  balance: number;
-  available: number;
-  locked: number;
+  assets: Asset[]
 }
 
 export const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
-  const { balance, available, locked } = props;
+  const { assets } = props
 
   return (
     <Card>
@@ -19,21 +22,21 @@ export const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
         <div className="d-flex justify-content-between">
           <div className="d-flex flex-column">
             <p className="small mb-0">Total Balance</p>
-            <p className="h3">{toMoneyFormat(balance)}</p>
+            <p className="h3">{toMoneyFormat(getTotalBalance(assets))}</p>
           </div>
           <div className="d-flex">
             <div className="d-flex flex-column">
               <p className="small mb-0">Total Available</p>
-              <p className="h5">{toMoneyFormat(available)}</p>
+              <p className="h5">{toMoneyFormat(getAvailableBalance(assets))}</p>
             </div>
             <VSplitter />
             <div className="d-flex flex-column">
               <p className="small mb-0">Total Locked</p>
-              <p className="h5">{toMoneyFormat(locked)}</p>
+              <p className="h5">{toMoneyFormat(getLockedBalance(assets))}</p>
             </div>
           </div>
         </div>
       </Card.Body>
     </Card>
-  );
-};
+  )
+}

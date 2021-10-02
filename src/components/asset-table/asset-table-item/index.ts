@@ -1,1 +1,1 @@
-export { AssetTableItem } from './AssetTableItem';
+export { AssetTableItem } from './AssetTableItem'

@@ -1,17 +1,17 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React from 'react'
+import { Card } from 'react-bootstrap'
 
-import { AssetTableHeader } from './asset-table-header';
-import { AssetTableItem } from './asset-table-item';
+import { AssetTableHeader } from './asset-table-header'
+import { AssetTableItem } from './asset-table-item'
 
 interface AssetTableProps {
-  assets?: Asset[];
+  assets?: Asset[]
 }
 
 export const AssetTable: React.FC<AssetTableProps> = (
   props: AssetTableProps,
 ) => {
-  const { assets } = props;
+  const { assets } = props
 
   return assets?.length ? (
     <>
@@ -28,5 +28,5 @@ export const AssetTable: React.FC<AssetTableProps> = (
         </p>
       </Card.Body>
     </Card>
-  );
-};
+  )
+}

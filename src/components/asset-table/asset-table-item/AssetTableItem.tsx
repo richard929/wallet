@@ -1,15 +1,15 @@
-import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { toMoneyFormat, toTokenFormat } from '../../../utils/formatter';
+import React from 'react'
+import { Card, Col, Container, Row } from 'react-bootstrap'
+import { toMoneyFormat, toTokenFormat } from '../../../utils/formatter'
 
 interface AssetTableItemProps {
-  asset: Asset;
+  asset: Asset
 }
 
 export const AssetTableItem: React.FC<AssetTableItemProps> = (
   props: AssetTableItemProps,
 ) => {
-  const { asset } = props;
+  const { asset } = props
 
   return (
     <Card className="my-1">
@@ -23,18 +23,18 @@ export const AssetTableItem: React.FC<AssetTableItemProps> = (
               </div>
             </Col>
             <Col md={3}>
-              <p>{toTokenFormat(asset.total)}</p>
+              <p>{toTokenFormat(asset.total, asset.name)}</p>
               <p>{toMoneyFormat(asset.total * asset.price)}</p>
             </Col>
             <Col md={2}>
-              <p>{toMoneyFormat(asset.available)}</p>
+              <p>{toMoneyFormat(asset.available * asset.price)}</p>
             </Col>
             <Col md={2}>
-              <p>{toMoneyFormat(asset.locked)}</p>
+              <p>{toMoneyFormat(asset.locked * asset.price)}</p>
             </Col>
           </Row>
         </Container>
       </Card.Body>
     </Card>
-  );
-};
+  )
+}

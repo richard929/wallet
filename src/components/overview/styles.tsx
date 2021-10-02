@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const VSplitter = styled.div`
   border-left: 1px solid #ccc;
@@ -7,4 +7,4 @@ export const VSplitter = styled.div`
   @media (min-width: 576px) {
     margin: 0 2rem;
   }
-`;
+`

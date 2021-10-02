@@ -1,7 +1,7 @@
 interface Asset {
-  name: string;
-  price: number;
-  total: number;
-  available: number;
-  locked: number;
+  name: string
+  price: number
+  total: number
+  available: number
+  locked: number
 }
