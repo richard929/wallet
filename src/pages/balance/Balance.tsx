@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Card, Container, Spinner } from 'react-bootstrap'
+import { Alert, Card, Container, Spinner } from 'react-bootstrap'
 
 import { AssetTable } from '../../components/asset-table'
 import { Overview } from '../../components/overview'
@@ -38,21 +38,19 @@ export const Balance: React.FC = () => {
   return (
     <Container>
       <h3 className="m-3">Balances</h3>
-      {loading || error ? (
+      {loading && (
         <Card>
           <Card.Body>
             <div className="d-flex align-items-center justify-content-center">
-              {loading ? (
-                <Spinner animation="border" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
-              ) : (
-                <p className="text-error">{JSON.stringify(error)}</p>
-              )}
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
             </div>
           </Card.Body>
         </Card>
-      ) : (
+      )}
+      {error && <Alert variant="danger">Error fetching account data</Alert>}
+      {!loading && !error && (
         <>
           <div className="mt-3 mb-5">
             <Overview assets={assets} />

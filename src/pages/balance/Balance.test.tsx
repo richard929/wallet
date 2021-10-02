@@ -77,10 +77,6 @@ describe('balance page', () => {
 
     await waitForSeconds(1)
 
-    expect(
-      wrapper.getByText(
-        '{"status":"FETCH_ERROR","error":"Error: Internal Server Error"}',
-      ),
-    ).toBeTruthy()
+    expect(wrapper.getByText('Error fetching account data')).toBeTruthy()
   })
 })
