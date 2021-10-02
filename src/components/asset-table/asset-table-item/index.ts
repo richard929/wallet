@@ -1,0 +1,1 @@
+export { AssetTableItem } from './AssetTableItem';
