@@ -1,3 +1,5 @@
+import { faLock } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Card } from 'react-bootstrap'
 
@@ -31,7 +33,12 @@ export const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
             </div>
             <VSplitter />
             <div className="d-flex flex-column">
-              <p className="small mb-0">Total Locked</p>
+              <div className="d-flex align-items-center">
+                <p className="small mb-0">Total Locked</p>
+                <div className="d-flex mx-2">
+                  <FontAwesomeIcon color="grey" size="sm" icon={faLock} />
+                </div>
+              </div>
               <p className="h5">{toMoneyFormat(getLockedBalance(assets))}</p>
             </div>
           </div>

@@ -15,22 +15,28 @@ export const AssetTableItem: React.FC<AssetTableItemProps> = (
     <Card className="my-1">
       <Card.Body>
         <Container>
-          <Row>
-            <Col md={5}>
-              <div>
-                <p>{asset.name}</p>
-                <p>{toMoneyFormat(asset.price)}</p>
-              </div>
+          <Row className="align-items-center">
+            <Col md={5} xs={3}>
+              <p className="mb-0">{asset.name}</p>
+              <p className="text-muted small mb-0">
+                {toMoneyFormat(asset.price)}
+              </p>
             </Col>
-            <Col md={3}>
-              <p>{toTokenFormat(asset.total, asset.name)}</p>
-              <p>{toMoneyFormat(asset.total * asset.price)}</p>
+            <Col md={3} xs={3}>
+              <p className="mb-0">{toTokenFormat(asset.total, asset.name)}</p>
+              <p className="text-muted small mb-0">
+                {toMoneyFormat(asset.total * asset.price)}
+              </p>
             </Col>
-            <Col md={2}>
-              <p>{toMoneyFormat(asset.available * asset.price)}</p>
+            <Col md={2} xs={3}>
+              <p className="mb-0">
+                {toMoneyFormat(asset.available * asset.price)}
+              </p>
             </Col>
-            <Col md={2}>
-              <p>{toMoneyFormat(asset.locked * asset.price)}</p>
+            <Col md={2} xs={3}>
+              <p className="mb-0">
+                {toMoneyFormat(asset.locked * asset.price)}
+              </p>
             </Col>
           </Row>
         </Container>
