@@ -1,13 +1,16 @@
 import React, { useMemo } from 'react'
 import { Card, Container, Spinner } from 'react-bootstrap'
 
-import { AssetTable } from './components/asset-table'
-import { Overview } from './components/overview'
-import { useGetAccountByAddressQuery, useGetPricesQuery } from './services/kava'
-import { getAssets } from './utils/calculator'
+import { AssetTable } from '../../components/asset-table'
+import { Overview } from '../../components/overview'
+import {
+  useGetAccountByAddressQuery,
+  useGetPricesQuery,
+} from '../../services/kava'
+import { getAssets } from '../../utils/calculator.utils'
 
-const App: React.FC = () => {
-  const prices = useGetPricesQuery(null, {
+export const Balance: React.FC = () => {
+  const prices = useGetPricesQuery(undefined, {
     pollingInterval: 5000,
   })
   const account = useGetAccountByAddressQuery(
@@ -18,7 +21,7 @@ const App: React.FC = () => {
   )
 
   const loading = useMemo(
-    () => account.isLoading && prices.isLoading,
+    () => account.isLoading || prices.isLoading,
     [account, prices],
   )
 
@@ -44,7 +47,7 @@ const App: React.FC = () => {
                   <span className="visually-hidden">Loading...</span>
                 </Spinner>
               ) : (
-                <p className="text-error">{error}</p>
+                <p className="text-error">{JSON.stringify(error)}</p>
               )}
             </div>
           </Card.Body>
@@ -60,5 +63,3 @@ const App: React.FC = () => {
     </Container>
   )
 }
-
-export default App

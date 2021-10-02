@@ -65,7 +65,7 @@ interface AccountValueData {
   account_number: string
   address: string
   public_key: PublicKeyData
-  sequence: number
+  sequence: string
   coins: CoinData[]
   delegated_free: CoinData[]
   delegated_vesting: CoinData[]

@@ -58,7 +58,7 @@ export const getAssets = (account: Account, prices?: Price[]): Asset[] => {
 const getBalance = (
   assets: Asset[],
   type: 'total' | 'available' | 'locked',
-  usd = true,
+  usd: boolean,
 ) =>
   assets.reduce(
     (sum: number, asset: Asset) => sum + asset[type] * (usd ? asset.price : 1),

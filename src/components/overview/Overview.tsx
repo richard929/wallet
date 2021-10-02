@@ -7,16 +7,16 @@ import {
   getAvailableBalance,
   getLockedBalance,
   getTotalBalance,
-} from '../../utils/calculator'
-import { toMoneyFormat } from '../../utils/formatter'
+} from '../../utils/calculator.utils'
+import { toMoneyFormat } from '../../utils/formatter.utils'
 import { VSplitter } from './styles'
 
 export interface OverviewProps {
-  assets: Asset[]
+  assets?: Asset[]
 }
 
 export const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
-  const { assets } = props
+  const { assets = [] } = props
 
   return (
     <Card>
@@ -24,12 +24,16 @@ export const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
         <div className="d-flex justify-content-between">
           <div className="d-flex flex-column">
             <p className="small mb-0">Total Balance</p>
-            <p className="h3">{toMoneyFormat(getTotalBalance(assets))}</p>
+            <p className="h3" data-testid="total:usd">
+              {toMoneyFormat(getTotalBalance(assets))}
+            </p>
           </div>
           <div className="d-flex">
             <div className="d-flex flex-column">
               <p className="small mb-0">Total Available</p>
-              <p className="h5">{toMoneyFormat(getAvailableBalance(assets))}</p>
+              <p className="h5" data-testid="available:usd">
+                {toMoneyFormat(getAvailableBalance(assets))}
+              </p>
             </div>
             <VSplitter />
             <div className="d-flex flex-column">
@@ -39,7 +43,9 @@ export const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
                   <FontAwesomeIcon color="grey" size="sm" icon={faLock} />
                 </div>
               </div>
-              <p className="h5">{toMoneyFormat(getLockedBalance(assets))}</p>
+              <p className="h5" data-testid="locked:usd">
+                {toMoneyFormat(getLockedBalance(assets))}
+              </p>
             </div>
           </div>
         </div>

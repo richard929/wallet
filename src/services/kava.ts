@@ -1,14 +1,16 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { coinData2Coin } from '../utils/formatter'
+import { coinData2Coin } from '../utils/formatter.utils'
+
+export const kavaURL = 'https://api.kava.io/'
 
 // Define a service using a base URL and expected endpoints
 export const kavaApi = createApi({
   reducerPath: 'kavaApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.kava.io/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: kavaURL }),
   endpoints: (builder) => ({
-    getPrices: builder.query<PriceResponse, null>({
+    getPrices: builder.query<PriceResponse, undefined>({
       query: () => `pricefeed/prices`,
       transformResponse: (data: PriceResponseData) => ({
         height: +data.height,

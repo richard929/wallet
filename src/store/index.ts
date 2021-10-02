@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { kavaApi } from '../services/kava'
 
-// ...
+import { kavaApi } from '../services/kava'
 
 export const store = configureStore({
   reducer: {
