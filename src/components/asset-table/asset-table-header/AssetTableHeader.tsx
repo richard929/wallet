@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 export const AssetTableHeader: React.FC = () => (
-  <Container>
+  <Container className="my-1">
     <Row>
       <Col md={5}>
         <p>Asset</p>
